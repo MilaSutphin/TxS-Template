@@ -28,13 +28,13 @@
   <main class="container">
 
     <div id="title" class="row">
-      <div class="col-md-12 text-center">
+      <div class="col-md-12 text-center mb-3">
         <h1> How Dancible is God's Plan by Drake?</h1>
       </div>
     </div>
 
     <div id="gif-panel" class="row">
-      <div class="col-md-12">
+      <div class="col-md-8 offset-2">
         <div id="main-image" class="box-image">
           <div id="vote-box" class="label text-center">
             <h1> Please vote ! </h1>
@@ -46,31 +46,23 @@
       </div>
       <div class="col-md-12">
         <div class="row">
-          <div class="col-2">
-            <img class="img-fluid img-limit" src="images/1f62d.svg">
+          <div class="col-1 offset-1">
+            <img class="img-fluid img-limit mt-3" src="images/1f62d.svg">
           </div>
-          <div class="col-8">
-            <div onclick="buttons()" class="row text-center">
-              <div onclick="gifFunction1()" class="col-1 cursor">1</div>
-              <div onclick="gifFunction2()" class="col-1 cursor">2</div>
-              <div onclick="gifFunction3()" class="col-1 cursor">3</div>
-              <div onclick="gifFunction4()" class="col-1 cursor">4</div>
-              <div onclick="gifFunction5()" class="col-1 cursor">5</div>
-              <div onclick="gifFunction6()" class="col-1 cursor">6</div>
-              <div onclick="gifFunction7()" class="col-1 cursor">7</div>
-              <div onclick="gifFunction8()" class="col-1 cursor">8</div>
-              <div onclick="gifFunction9()" class="col-1 cursor">9</div>
-              <div onclick="gifFunction10()" class="col-1 cursor">10</div>
+          <div class="col-8 mt-4">
+            <div class="row">
+              <input oninput="sliderChange()" id="range" class="range-style" type="range" min="1" max="10" step="1" />
             </div>
           </div>
+
           <div class="col-2">
-            <img class="img-fluid img-limit" src="images/1f483.svg">
+            <img class="img-fluid img-limit mt-3" src="images/1f483.svg">
           </div>
         </div>
       </div>
-      <div class="col-md-12 text-center">
+      <div class="col-md-12 text-center mt-3">
         <div class="">
-          <a id="result-button" href="#" class="btn btn-primary" role="button" onclick="onClick()" aria-pressed="true">Compare</a>
+          <a id="result-button" href="#" class="btn btn-primary mt-4" role="button" onclick="onClick()" aria-pressed="true">Compare</a>
         </div>
       </div>
     </div>
@@ -94,7 +86,7 @@
           </div>
         </div>
         <div class="col-4 yr">
-          <div id="yr-image" class="box-image">
+          <div id="yr-image" class="box-image ">
             <div class="label">
               <img class="img-fluid img-limit" src="images/yr.svg">
               <h1 id="yr-score"> 10 </h1>
