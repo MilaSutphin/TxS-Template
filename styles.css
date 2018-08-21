@@ -10,7 +10,7 @@
 }
 .box-image {
   /* border-radius: 40px; */
-  background-image: url(https://i.scdn.co/image/012ecd119617ac24ab56620ace4b81735b172686);
+  /* background-image: url(https://i.scdn.co/image/012ecd119617ac24ab56620ace4b81735b172686); */
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -75,7 +75,7 @@
 .label {
   height: 80px;
   color: white;
-  text-shadow: -1px 0 lime, 0 1px lime, 1px 0 lime, 0 -1px lime;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 .cursor {
   cursor: pointer;
