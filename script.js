@@ -18,6 +18,7 @@ var songsData = [{
     spotifyRating: "8",
     artistName: "Drake",
     userRating: null,
+    songNumber: "1",
   },
   {
     songTitle: "Pepper",
@@ -25,6 +26,7 @@ var songsData = [{
     spotifyRating: "6",
     artistName: "Butthole Surfers",
     userRating: null,
+    songNumber: "2",
   },
   {
     songTitle: "Crown",
@@ -32,6 +34,7 @@ var songsData = [{
     spotifyRating: "7",
     artistName: "Flatbush Zombies ",
     userRating: null,
+    songNumber: "3",
   },
   {
     songTitle: "What I Got",
@@ -39,6 +42,7 @@ var songsData = [{
     spotifyRating: "6",
     artistName: "Sublime",
     userRating: null,
+    songNumber: "4",
   },
   {
     songTitle: "Teenage Dirtbag",
@@ -46,6 +50,7 @@ var songsData = [{
     spotifyRating: "6",
     artistName: "Wheatus",
     userRating: null,
+     songNumber: "5",
   },
   {
     songTitle: "Face",
@@ -53,6 +58,7 @@ var songsData = [{
     spotifyRating: "9",
     artistName: "Brockhampton",
     userRating: null,
+    songNumber: "6",
   }
 ]
 
@@ -60,8 +66,8 @@ var colors = ["rgb(43,43,43)"]
 var resultBox = document.getElementById('result')
 var titleBox = document.getElementById('title')
 var songTitle = document.getElementById('song-title')
-var artist = document.getElementById('artist ')
-songsData[currentSong].songTitle = titleBox
+var artist = document.getElementById('artist')
+//songsData[currentSong].songTitle = titleBox
 var gifPanel = document.getElementById('gif-panel')
 var mainImage = document.getElementById('main-image')
 var youImage = document.getElementById('you-image')
@@ -75,13 +81,17 @@ var slider = document.getElementById('range')
 var nextSong = document.getElementById('next-song')
 var iframeElement = document.querySelector("#song-iframe");
 var currentSong = 0
-var finalButton = document.getElementById('final-button')
+var final = document.getElementById('final-button')
+var finalPage = document.getElementById('end-page')
+var sliderNumber = document.getElementById('slider-number')
+var songNumbers = document.getElementById('song-number')
 
 
 resultBox.hidden = true;
 resultButton.hidden = true;
 nextSong.hidden = true;
-finalButton.hidden = true;
+final.hidden = true;
+finalPage.hidden = true;
 setAlbumCover(songsData[currentSong].songURI, mainImage);
 iframeElement.src = getSpotifySrc(songsData[currentSong].songURI);
 
@@ -94,6 +104,7 @@ var userRating;
 
 function sliderChange() {
   userRating = slider.value;
+  sliderNumber.innerHTML = slider.value;
   mainImage.style.backgroundImage = gifs[userRating - 1];
   resultButton.hidden = false;
 }
@@ -115,15 +126,17 @@ function gifFunction(rate) {
 
 function onClick() {
   youScore.innerHTML = userRating;
+//  songsData[currentSong].spotifyRating = spotifyScore
   gifPanel.hidden = true;
   resultBox.hidden = false;
-  spotifyScore.innerHTML = songsData[currentSong].spotifyRating
-  spotifyImage.style.backgroundImage = gifs[parseInt(songsData[currentSong].spotifyRating)];
+  spotifyScore.innerHTML = songsData[currentSong].spotifyRating;
+  spotifyImage.style.backgroundImage = gifs[parseInt(songsData[currentSong].spotifyRating - 1)];
   youImage.style.backgroundImage = gifs[userRating - 1];
   nextSong.hidden = false;
-  if (currentSong === songsData[5].songURI) {
+  if (currentSong === (songsData.length - 1)) {
     nextSong.Hidden = true;
-    finalButton.hidden = false;
+    final.hidden = false;
+    onClick3();
   }
 }
 
@@ -135,6 +148,9 @@ function onClick2() {
   currentSong = 1 + currentSong
   setAlbumCover(songsData[currentSong].songURI, mainImage);
   iframeElement.src = getSpotifySrc(songsData[currentSong].songURI);
+  songTitle.innerHTML = songsData[currentSong].songTitle;
+  artist.innerHTML = songsData[currentSong].artistName;
+  songNumbers.innerHTML = songsData[currentSong].songNumber;
 }
 
 
@@ -144,7 +160,11 @@ function getSpotifySrc(song) {
 }
 
 function onClick3() {
-  resultBox.style.backgroundImage = finalPage //create final page
+  songTitle.hidden = true;
+  gifPanel.hiden = true;
+  resultBox.hidden = true;
+  resultBox.style.backgroundImage = finalPage;
+  finalPage.hidden = false;
 }
 
 async function setAlbumCover(song, element) {
