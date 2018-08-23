@@ -85,6 +85,8 @@ var final = document.getElementById('final-button')
 var finalPage = document.getElementById('end-page')
 var sliderNumber = document.getElementById('slider-number')
 var songNumbers = document.getElementById('song-number')
+var resultELement = document.getElementById('result-element');
+
 
 
 resultBox.hidden = true;
@@ -92,6 +94,7 @@ resultButton.hidden = true;
 nextSong.hidden = true;
 final.hidden = true;
 finalPage.hidden = true;
+resultELement.hidden = true;
 setAlbumCover(songsData[currentSong].songURI, mainImage);
 iframeElement.src = getSpotifySrc(songsData[currentSong].songURI);
 
@@ -133,24 +136,26 @@ function onClick() {
   spotifyImage.style.backgroundImage = gifs[parseInt(songsData[currentSong].spotifyRating - 1)];
   youImage.style.backgroundImage = gifs[userRating - 1];
   nextSong.hidden = false;
-  if (currentSong === (songsData.length - 1)) {
-    nextSong.Hidden = true;
-    final.hidden = false;
-    onClick3();
-  }
+  songsData[currentSong].userRating = userRating;
 }
 
 function onClick2() {
+  currentSong = 1 + currentSong;
   resultBox.hidden = true;
-  gifPanel.hidden = false;
   resultButton.hidden = true;
   nextSong.hidden = true;
-  currentSong = 1 + currentSong
-  setAlbumCover(songsData[currentSong].songURI, mainImage);
-  iframeElement.src = getSpotifySrc(songsData[currentSong].songURI);
-  songTitle.innerHTML = songsData[currentSong].songTitle;
-  artist.innerHTML = songsData[currentSong].artistName;
-  songNumbers.innerHTML = songsData[currentSong].songNumber;
+  if (currentSong > (songsData.length - 1)) {
+    nextSong.Hidden = true;
+    final.hidden = false;
+    onClick3();
+  } else {
+    gifPanel.hidden = false;
+    setAlbumCover(songsData[currentSong].songURI, mainImage);
+    iframeElement.src = getSpotifySrc(songsData[currentSong].songURI);
+    songTitle.innerHTML = songsData[currentSong].songTitle;
+    artist.innerHTML = songsData[currentSong].artistName;
+    songNumbers.innerHTML = songsData[currentSong].songNumber;
+  }
 }
 
 
@@ -165,6 +170,8 @@ function onClick3() {
   resultBox.hidden = true;
   resultBox.style.backgroundImage = finalPage;
   finalPage.hidden = false;
+  resultELement.Hidden = false;
+  score()
 }
 
 async function setAlbumCover(song, element) {
@@ -180,6 +187,23 @@ async function getAlbumCover(song) {
   return data.thumbnail_url;
 }
 
+
+var myResult;
+function score(){
+  myResult = (Math.abs(songsData[0].userRating - songsData[0].spotifyRating)
+    + Math.abs(songsData[1].userRating - songsData[1].spotifyRating)
+    + Math.abs(songsData[2].userRating - songsData[2].spotifyRating)
+    + Math.abs(songsData[3].userRating - songsData[3].spotifyRating)
+    + Math.abs(songsData[4].userRating - songsData[4].spotifyRating)
+    + Math.abs(songsData[5].userRating - songsData[5].spotifyRating)
+    + Math.abs(songsData[6].userRating - songsData[6].spotifyRating))
+    / songsData.length;
+
+    if (myResult > 0 && myResults <= 3){
+      resultELement.innerHTML = "something"
+    }
+
+}
 
 //access songURI
 //  songsData[0].songURI
