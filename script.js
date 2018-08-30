@@ -82,19 +82,18 @@ var nextSong = document.getElementById('next-song')
 var iframeElement = document.querySelector("#song-iframe");
 var currentSong = 0
 var final = document.getElementById('final-button')
-var finalPage = document.getElementById('end-page')
 var sliderNumber = document.getElementById('slider-number')
 var songNumbers = document.getElementById('song-number')
-var resultELement = document.getElementById('result-element');
-
-
+var resultElement = document.getElementById('finalpage');
+var songNumberWords = document.getElementById('songNumberWords')
+var scoreNumber = document.getElementById('score-number')
 
 resultBox.hidden = true;
 resultButton.hidden = true;
 nextSong.hidden = true;
 final.hidden = true;
-finalPage.hidden = true;
-resultELement.hidden = true;
+resultElement.hidden = true;
+scoreNumber.hidden = true;
 setAlbumCover(songsData[currentSong].songURI, mainImage);
 iframeElement.src = getSpotifySrc(songsData[currentSong].songURI);
 
@@ -147,6 +146,7 @@ function onClick2() {
   if (currentSong > (songsData.length - 1)) {
     nextSong.Hidden = true;
     final.hidden = false;
+    // songTitle.innerHTML = "yay";
     onClick3();
   } else {
     gifPanel.hidden = false;
@@ -166,11 +166,14 @@ function getSpotifySrc(song) {
 
 function onClick3() {
   songTitle.hidden = true;
-  gifPanel.hiden = true;
-  resultBox.hidden = true;
-  resultBox.style.backgroundImage = finalPage;
-  finalPage.hidden = false;
-  resultELement.Hidden = false;
+  final.hidden = true;
+  gifPanel.hidden = true;
+  scoreNumber.hidden = false;
+  resultBox.style.backgroundImage = resultElement;
+  resultElement.Hidden = false;
+  songNumberWords.hidden = true;
+  scoreNumber.innerHTML = myResult;
+  title.innerHTML = "<h1> Your Score </h1>"
   score()
 }
 
@@ -188,6 +191,11 @@ async function getAlbumCover(song) {
 }
 
 
+//nextSong.onclick = "onClick3()"
+//nextSong.innerHTML = "Done"
+
+
+var myResultImage;
 var myResult;
 function score(){
   myResult = (Math.abs(songsData[0].userRating - songsData[0].spotifyRating)
@@ -195,14 +203,22 @@ function score(){
     + Math.abs(songsData[2].userRating - songsData[2].spotifyRating)
     + Math.abs(songsData[3].userRating - songsData[3].spotifyRating)
     + Math.abs(songsData[4].userRating - songsData[4].spotifyRating)
-    + Math.abs(songsData[5].userRating - songsData[5].spotifyRating)
-    + Math.abs(songsData[6].userRating - songsData[6].spotifyRating))
+    + Math.abs(songsData[5].userRating - songsData[5].spotifyRating))
     / songsData.length;
-
-    if (myResult > 0 && myResults <= 3){
-      resultELement.innerHTML = "something"
+    myResult = myResultImage + Math.round(myResult);
+    resultElement.innerHTML = myResultImage
+    if (myResult > 0 && myResult <= 10){
+      resultElement.innerHTML = "best friends"
     }
-
+//    if (myResult > 2.5 && myResult <= 5){
+//      resultElement.innerHTML = "friends"
+//    };
+//    if (myResult > 5 && myResult <= 7.5){
+//      resultElement.innerHTML = "kind of friends"
+//    };
+//    if (myResult > 7.5 && myResult <= 10){
+//      resultElement.innerHTML = "best friends"
+//    };
 }
 
 //access songURI
